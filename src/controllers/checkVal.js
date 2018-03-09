@@ -9,7 +9,10 @@ const {
 
 router.get('/compare', (req, res) => {
   getValues()
-    .then(value => res.send(value))
+    .then(value => {
+      res.status(STATUS_SUCCESS)
+      res.send(value)
+    })
     .catch(err => res.send({ error: err }));
 })
 
