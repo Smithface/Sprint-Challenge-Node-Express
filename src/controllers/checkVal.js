@@ -4,7 +4,7 @@ const router = express.Router();
 const STATUS_SUCCESS = 200;
 
 const {
-  functions
+  getValues
 } = require('../models/checkVal.js');
 
 router.get('/compare', (req, res) => {
@@ -12,3 +12,5 @@ router.get('/compare', (req, res) => {
     .then(values => res.send(values))
     .catch(err => res.send(err));
 })
+
+module.exports = router;

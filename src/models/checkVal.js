@@ -16,3 +16,7 @@ function getValues() {
       .catch(err => reject(err));
   });
 }
+
+module.exports = {
+  getValues
+};
