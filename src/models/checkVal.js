@@ -7,12 +7,12 @@ function getValues() {
   return new Promise((resolve, reject) => {
     const todayValue = fetch(TODAY_URL)
       .then(result => result.json())
-      .then(obj => obj.bpi.USD.rate)
+      .then(obj => obj.bpi.USD.rate_float)
     const yesterdayValue = fetch(YESTERDAY_URL)
       .then(result => result.json())
       .then(obj => Object.values(obj.bpi)[0])
     Promise.all([todayValue, yesterdayValue])
-      .then(values => resolve(values))
+      .then(values => resolve([values[0]-values[1]]))
       .catch(err => reject(err));
   });
 }
