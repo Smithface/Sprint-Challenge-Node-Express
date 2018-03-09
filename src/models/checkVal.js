@@ -12,7 +12,14 @@ function getValues() {
       .then(result => result.json())
       .then(obj => Object.values(obj.bpi)[0])
     Promise.all([todayValue, yesterdayValue])
-      .then(values => resolve([values[0]-values[1]]))
+      .then(values => {
+        const difference = values[0]-values[1];
+        if (difference < 0) {
+          resolve({ fallen: new Intl.NumberFormat('us-US', { style: 'currency', currency: 'USD' }).format(Math.abs(difference)) })
+        } else {
+          resolve({ risen: new Intl.NumberFormat('us-US', { style: 'currency', currency: 'USD' }).format(difference) })
+        }
+      })
       .catch(err => reject(err));
   });
 }
